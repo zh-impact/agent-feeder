@@ -1,20 +1,49 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Project: Agent Feeder - A project including browser extension for turning any website content into AI-friendly formats
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Monorepo structure (turborepo + pnpm workspaces):
+    apps/ext        - Browser extension (WXT + React) — current focus
+    apps/web        - Next.js web app
+    apps/docs       - Next.js documentation site
+    packages/ui     - Shared React UI components (@repo/ui)
+    packages/eslint-config - Shared ESLint config (@repo/eslint-config)
+    packages/typescript-config - Shared TypeScript config (@repo/typescript-config)
+
+  Tech stack:
+    - WXT (https://wxt.dev) - Web Extension Framework for building Chrome/Firefox/Safari/Edge extensions with Vite
+      - Not related to Mozilla WXT, it's a modern framework by Aklinker1
+      - Supports Manifest V3, TypeScript, React, Vue, Solid, Svelte
+      - Provides HMR, auto-imports, TypeScript APIs, and content script UI
+    - React 19
+    - TypeScript 5.9
+    - Tailwind CSS 4 (via @tailwindcss/vite)
+    - Vitest for testing
+    - PNPM 10 for package management
+    - Turbo 2 for monorepo management
+
+  Extension source layout (apps/ext/src):
+    entrypoints/     - WXT entry points (background.ts, content.ts, popup/)
+    assets/          - Static assets
+
+  Code style:
+    - Conventional commits
+    - Prettier: printWidth=100, semi=false, singleQuote=true
+    - Node >= 22
+
+rules:
+  proposal:
+    - Always include "Success Criteria" section
+    - Keep "Non-goals" explicit and concise
+    - Use clear, concise language
+    - Avoid jargon and technical terms without explanation
+
+  design:
+    - Include diagrams and flowcharts where appropriate
+    - Consider MV3 constraints and limitations
+
+  tasks:
+    - Break down into small, actionable tasks
+    - Each task should have a clear deliverable
+    - Tasks should be independent and testable
